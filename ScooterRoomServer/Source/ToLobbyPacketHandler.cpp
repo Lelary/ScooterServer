@@ -1,10 +1,11 @@
 #include <memory>
 #include <string>
 #include "ToLobbyPacketHandler.h"
+#include "LobbySessionHandler.h"
 
 namespace packet
 {
-	bool ToLobbyPacketHandler::Handle(std::unique_ptr<ToLobbyPacket> packet)
+	bool ToLobbyPacketHandler::Handle(network::LobbySessionHandler& session, std::unique_ptr<ToLobbyPacket> packet)
 	{
 		if (packet == nullptr)
 			return false;
@@ -12,11 +13,11 @@ namespace packet
 		switch (packet->packetType)
 		{
 		case PacketType::ReqRoomList:
-			return OnReqRoomList(static_cast<ReqRoomList*>(packet.get()));
+			return OnReqRoomList(session, static_cast<ReqRoomList*>(packet.get()));
 		case PacketType::CreateRoom:
-			return OnCreateRoom(static_cast<CreateRoom*>(packet.get()));
+			return OnCreateRoom(session, static_cast<CreateRoom*>(packet.get()));
 		case PacketType::EnterRoom:
-			return OnEnterRoom(static_cast<EnterRoom*>(packet.get()));
+			return OnEnterRoom(session, static_cast<EnterRoom*>(packet.get()));
 		default:
 			break;
 		}
@@ -24,30 +25,21 @@ namespace packet
 		return false;
 	}
 
-	bool ToLobbyPacketHandler::OnReqRoomList(ReqRoomList* packet)
+	bool ToLobbyPacketHandler::OnReqRoomList(network::LobbySessionHandler& session, ReqRoomList* packet)
+	{
+		//const char* msg = "";
+		//session.Send(msg, strnlen_s(msg, network::BUFFER_SIZE));
+		return true;
+	}
+
+	bool ToLobbyPacketHandler::OnCreateRoom(network::LobbySessionHandler& session, CreateRoom* packet)
 	{
 		return true;
 	}
 
-	bool ToLobbyPacketHandler::OnCreateRoom(CreateRoom* packet)
-	{
-		return true;
-	}
-
-	bool ToLobbyPacketHandler::OnEnterRoom(EnterRoom* packet)
+	bool ToLobbyPacketHandler::OnEnterRoom(network::LobbySessionHandler& session, EnterRoom* packet)
 	{
 		std::cout << packet->accountId << std::endl;
 		return true;
-	}
-
-	void example()
-	{
-		std::string _sampleJson = "{ \"packetGroup\" : 0, \"packetType\" : 2, \"accountId\" : 12345, \"roomId\" : 10 }";
-
-		ToLobbyPacketParser packetParser;
-		std::unique_ptr<ToLobbyPacket> packet = packetParser.Parse(_sampleJson);
-
-		ToLobbyPacketHandler packetHandler;
-		packetHandler.Handle(std::move(packet));
 	}
 }

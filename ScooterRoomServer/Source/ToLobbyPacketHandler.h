@@ -5,18 +5,21 @@
 #include "LobbyPacket.h"
 #include "ToLobbyPacketParser.h"
 
+namespace network
+{
+	class LobbySessionHandler;
+}
+
 namespace packet
 {
 	class ToLobbyPacketHandler
 	{
 	public:
-		bool Handle(std::unique_ptr<ToLobbyPacket> packet);
+		bool Handle(network::LobbySessionHandler& _session, std::unique_ptr<ToLobbyPacket> packet);
 
 	private:
-		bool OnReqRoomList(ReqRoomList* packet);
-		bool OnCreateRoom(CreateRoom* packet);
-		bool OnEnterRoom(EnterRoom* packet);
+		bool OnReqRoomList(network::LobbySessionHandler& session, ReqRoomList* packet);
+		bool OnCreateRoom(network::LobbySessionHandler& session, CreateRoom* packet);
+		bool OnEnterRoom(network::LobbySessionHandler& session, EnterRoom* packet);
 	};
-
-	void example();
 }

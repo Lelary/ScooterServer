@@ -1,6 +1,7 @@
 #include "LobbySessionHandler.h"
 #include "ToLobbyPacketParser.h"
 #include "ToLobbyPacketHandler.h"
+#include "LobbyServer.h"
 
 namespace network
 {
@@ -30,9 +31,8 @@ namespace network
 
 			std::cout << "message : " << _receiveBuffer << std::endl;
 
-			auto packet = _packetParser.Parse(_receiveBuffer);
-			if (!_packetHandler.Handle(std::move(packet)))
-				return false;
+ 			if (!HandlePacket(*this, _receiveBuffer))
+ 				return false;
 
 			return true;
 		}
@@ -40,5 +40,17 @@ namespace network
 		{
 			return false;
 		}
+	}
+
+	bool LobbySessionHandler::HandlePacket(LobbySessionHandler& session, const char* buffer)
+	{
+		auto packet = _packetParser.Parse(buffer);
+		if (packet == nullptr)
+			return false;
+
+		if (!_packetHandler.Handle(session, std::move(packet)))
+			return false;
+
+		return true;
 	}
 }

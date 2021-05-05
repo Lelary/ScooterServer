@@ -6,8 +6,6 @@
 
 int main()
 {
-	packet::example();
-
 	game::RoomManager roomManager(30000, 40000);
 	auto room1 = roomManager.Create(1);
 	std::thread th1([&room1]() { room1->Run(); });

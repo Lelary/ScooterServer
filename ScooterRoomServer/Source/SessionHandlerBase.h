@@ -1,9 +1,16 @@
 #pragma once
 
 #include <string>
-#include <Poco/Net/SocketReactor.h>
 #include <Poco/Net/SocketAcceptor.h>
-#include <Poco/Net/ParallelSocketAcceptor.h>
+
+namespace Poco
+{
+	namespace Net
+	{
+		class StreamSocket;
+		class SocketReactor;
+	}
+}
 
 namespace network
 {
@@ -31,6 +38,7 @@ namespace network
 			return (n > 0);
 		}
 
+	public:
 		bool Send(const char* message, int len)
 		{
 			if (len >= BUFFER_SIZE)

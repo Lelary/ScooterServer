@@ -12,7 +12,8 @@ namespace network
 		virtual void OnReadable(ReadableNotification* pNotification) override;
 	private:
 		bool _OnReadable(ReadableNotification* pNotification);
-
+		bool HandlePacket(LobbySessionHandler& session, const char* buffer);
+	private:
 		packet::ToLobbyPacketParser _packetParser;
 		packet::ToLobbyPacketHandler _packetHandler;
 	};
