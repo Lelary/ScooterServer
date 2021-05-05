@@ -153,7 +153,25 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="ScooterRoomServer.cpp" />
+    <ClCompile Include="Source\LobbyServer.cpp" />
+    <ClCompile Include="Source\LobbySessionHandler.cpp" />
+    <ClCompile Include="Source\RoomServer.cpp" />
+    <ClCompile Include="Source\RoomSessionHandler.cpp" />
+    <ClCompile Include="Source\SessionHandlerBase.cpp" />
+    <ClCompile Include="Source\Room.cpp" />
+    <ClCompile Include="Source\RoomManager.cpp" />
+    <ClCompile Include="Source\ScooterRoomServer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Source\Account.h" />
+    <ClInclude Include="Source\LobbyServer.h" />
+    <ClInclude Include="Source\LobbySessionHandler.h" />
+    <ClInclude Include="Source\RoomServer.h" />
+    <ClInclude Include="Source\RoomSessionHandler.h" />
+    <ClInclude Include="Source\SessionHandlerBase.h" />
+    <ClInclude Include="Source\Room.h" />
+    <ClInclude Include="Source\RoomManager.h" />
+    <ClInclude Include="Source\Server.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
