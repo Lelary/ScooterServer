@@ -8,6 +8,7 @@
 namespace network
 {
 	using namespace Poco::Net;
+	const unsigned BUFFER_SIZE = 1024;
 
 	class SessionHandlerBase
 	{
@@ -22,8 +23,39 @@ namespace network
 		// 		virtual void OnWritable(ReadableNotification* pNotification) = 0;
 
 	protected:
+		bool Receive()
+		{
+			ZeroMemory(_receiveBuffer, BUFFER_SIZE);
+
+			int n = _socket.receiveBytes(_receiveBuffer, sizeof(_receiveBuffer));
+			return (n > 0);
+		}
+
+		bool Send(const char* message, int len)
+		{
+			if (len >= BUFFER_SIZE)
+			{
+				std::cout << "error" << std::endl;
+				return false;
+			}
+
+			char sendBuffer[BUFFER_SIZE] = { 0, };
+			strncpy_s(sendBuffer, message, len);
+			_socket.sendBytes(sendBuffer, len);
+			return true;
+		}
+
+		void Shutdown()
+		{
+			_socket.shutdown();
+		}
+
+	protected:
 		std::string _peerAddress;
-		StreamSocket _socket;
 		SocketReactor& _reactor;
+		char _receiveBuffer[BUFFER_SIZE] = { 0, };
+
+	private:
+		StreamSocket _socket;
 	};
 }

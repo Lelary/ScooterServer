@@ -26,6 +26,6 @@ namespace game
 		const network::Port ROOM_PORT_START;
 
 		std::queue<network::Port> _unoccupiedPorts;
-		std::unordered_map<RoomNo, Room> _rooms;
+		std::unordered_map<RoomId, Room> _rooms;
 	};
 }

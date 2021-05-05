@@ -28,6 +28,12 @@
     <Filter Include="Source Files\Game">
       <UniqueIdentifier>{ccd5bf8e-f186-4256-8d93-7945c8806a72}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Packet">
+      <UniqueIdentifier>{599f11a7-22b4-4ba6-a444-17df4db31673}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Packet">
+      <UniqueIdentifier>{587b8213-d4f2-4e0e-b039-5b0ed5638193}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\ScooterRoomServer.cpp">
@@ -53,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="Source\RoomServer.cpp">
       <Filter>Source Files\Network</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ToLobbyPacketParser.cpp">
+      <Filter>Source Files\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\ToLobbyPacketHandler.cpp">
+      <Filter>Source Files\Packet</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -82,6 +94,18 @@
     </ClInclude>
     <ClInclude Include="Source\RoomServer.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LobbyPacket.h">
+      <Filter>Header Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\PacketGroup.h">
+      <Filter>Header Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ToLobbyPacketParser.h">
+      <Filter>Header Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ToLobbyPacketHandler.h">
+      <Filter>Header Files\Packet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

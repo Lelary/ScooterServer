@@ -2,10 +2,11 @@
 #include <thread>
 #include <Poco/Net/DNS.h>
 #include "RoomManager.h"
+#include "ToLobbyPacketHandler.h"
 
 int main()
 {
-	std::cout << Poco::Net::DNS::hostName() << std::endl;
+	packet::example();
 
 	game::RoomManager roomManager(30000, 40000);
 	auto room1 = roomManager.Create(1);

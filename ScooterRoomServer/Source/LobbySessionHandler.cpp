@@ -1,4 +1,6 @@
 #include "LobbySessionHandler.h"
+#include "ToLobbyPacketParser.h"
+#include "ToLobbyPacketHandler.h"
 
 namespace network
 {
@@ -10,29 +12,33 @@ namespace network
 
 	void LobbySessionHandler::OnReadable(ReadableNotification* pNotification)
 	{
+		if (!_OnReadable(pNotification))
+		{
+			Shutdown();
+			delete this;
+		}
+	}
+
+	bool LobbySessionHandler::_OnReadable(ReadableNotification* pNotification)
+	{
 		pNotification->release();
 
 		try
 		{
-			const unsigned BUFFER_SIZE = 256;
-			char buffer[BUFFER_SIZE] = { 0, };
-			int n = _socket.receiveBytes(buffer, sizeof(buffer));
+			if (!Receive())
+				return false;
 
-			if (n > 0)
-			{
-				std::cout << "message : " << buffer << std::endl;
-			}
-			else
-			{
-				_socket.shutdown();
-				delete this;
-			}
+			std::cout << "message : " << _receiveBuffer << std::endl;
+
+			auto packet = _packetParser.Parse(_receiveBuffer);
+			if (!_packetHandler.Handle(std::move(packet)))
+				return false;
+
+			return true;
 		}
 		catch (const Poco::Exception& e)
 		{
-			_socket.shutdown();
-
-			delete this;
+			return false;
 		}
 	}
 }

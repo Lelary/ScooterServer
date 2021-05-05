@@ -8,7 +8,7 @@
 
 namespace game
 {
-	using RoomNo = unsigned __int64;
+	using RoomId = unsigned __int64;
 
 	class Room
 	{
