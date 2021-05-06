@@ -166,10 +166,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Account.h" />
+    <ClInclude Include="Source\IServer.h" />
     <ClInclude Include="Source\LobbyPacket.h" />
     <ClInclude Include="Source\LobbyServer.h" />
     <ClInclude Include="Source\LobbySessionHandler.h" />
     <ClInclude Include="Source\PacketGroup.h" />
+    <ClInclude Include="Source\ScooterSocketAcceptor.h" />
     <ClInclude Include="Source\ToLobbyPacketHandler.h" />
     <ClInclude Include="Source\ToLobbyPacketParser.h" />
     <ClInclude Include="Source\RoomServer.h" />

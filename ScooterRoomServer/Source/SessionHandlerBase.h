@@ -2,6 +2,7 @@
 
 #include <string>
 #include <Poco/Net/SocketAcceptor.h>
+#include "Account.h"
 
 namespace Poco
 {
@@ -16,6 +17,7 @@ namespace network
 {
 	using namespace Poco::Net;
 	const unsigned BUFFER_SIZE = 1024;
+	struct IServer;
 
 	class SessionHandlerBase
 	{
@@ -30,33 +32,23 @@ namespace network
 		// 		virtual void OnWritable(ReadableNotification* pNotification) = 0;
 
 	protected:
-		bool Receive()
-		{
-			ZeroMemory(_receiveBuffer, BUFFER_SIZE);
-
-			int n = _socket.receiveBytes(_receiveBuffer, sizeof(_receiveBuffer));
-			return (n > 0);
-		}
+		bool Receive();
 
 	public:
-		bool Send(const char* message, int len)
-		{
-			if (len >= BUFFER_SIZE)
-			{
-				std::cout << "error" << std::endl;
-				return false;
-			}
+		bool Send(const char* message, int len);
+		void Shutdown();
 
-			char sendBuffer[BUFFER_SIZE] = { 0, };
-			strncpy_s(sendBuffer, message, len);
-			_socket.sendBytes(sendBuffer, len);
-			return true;
-		}
+		void OnLoginSuccess(account::AccountId accountId, const std::string& token);
+		void OnLoginFailure(account::AccountId accountId, const std::string& token);
 
-		void Shutdown()
-		{
-			_socket.shutdown();
-		}
+	public:
+		IServer* GetServer() const { return _server; }
+		void SetServer(IServer* server) { _server = server; }
+
+		account::AccountId GetAccountId() const { return _accountId; }
+		void SetAccountId(account::AccountId accountId) { _accountId = accountId; }
+
+		bool IsAuthorized() const { return _isAuthorized; }
 
 	protected:
 		std::string _peerAddress;
@@ -64,6 +56,9 @@ namespace network
 		char _receiveBuffer[BUFFER_SIZE] = { 0, };
 
 	private:
+		bool _isAuthorized;
 		StreamSocket _socket;
+		IServer* _server;
+		account::AccountId _accountId;
 	};
 }

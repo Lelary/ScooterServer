@@ -89,12 +89,6 @@
     <ClInclude Include="Source\LobbySessionHandler.h">
       <Filter>Header Files\Network</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LobbyServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\RoomServer.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Source\LobbyPacket.h">
       <Filter>Header Files\Packet</Filter>
     </ClInclude>
@@ -106,6 +100,18 @@
     </ClInclude>
     <ClInclude Include="Source\ToLobbyPacketHandler.h">
       <Filter>Header Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\IServer.h">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ScooterSocketAcceptor.h">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LobbyServer.h">
+      <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RoomServer.h">
+      <Filter>Header Files\Network</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

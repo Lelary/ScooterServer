@@ -18,6 +18,7 @@ namespace packet
 
 	private:
 		std::unique_ptr<ToLobbyPacket> Parse(const std::string& buffer, PacketType& refPacketType);
+		std::unique_ptr<ToLobbyPacket> ParseReqLogin(Object::Ptr object);
 		std::unique_ptr<ToLobbyPacket> ParseReqRoomList(Object::Ptr object);
 		std::unique_ptr<ToLobbyPacket> ParseCreateRoom(Object::Ptr object);
 		std::unique_ptr<ToLobbyPacket> ParseEnterRoom(Object::Ptr object);

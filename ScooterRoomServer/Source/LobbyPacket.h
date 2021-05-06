@@ -6,11 +6,18 @@ namespace packet
 {
 	namespace to_lobby
 	{
-		enum class PacketType { ReqRoomList, CreateRoom, EnterRoom };
+		enum class PacketType { ReqLogin, ReqRoomList, CreateRoom, EnterRoom };
 
 		struct ToLobbyPacket
 		{
 			PacketType packetType;
+			
+		};
+
+		struct ReqLogin : public ToLobbyPacket
+		{
+			account::AccountId accountId;
+			std::string token;
 		};
 
 		struct ReqRoomList : public ToLobbyPacket
@@ -19,13 +26,13 @@ namespace packet
 
 		struct CreateRoom : public ToLobbyPacket
 		{
-			account::AccountId accountId;
+//			account::AccountId accountId;
 		};
 		
 		struct EnterRoom : public ToLobbyPacket
 		{
 			game::RoomId roomId;
-			account::AccountId accountId;
+//			account::AccountId accountId;
 		};
 	}
 }

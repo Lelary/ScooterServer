@@ -1,5 +1,7 @@
 #pragma once
+#include "IServer.h"
 #include "SessionHandlerBase.h"
+#include "ScooterSocketAcceptor.h"
 
 namespace network
 {
@@ -8,7 +10,7 @@ namespace network
 	constexpr Port PORT_NONE = 0;
 
 	template <typename T>
-	class Server
+	class Server : public IServer
 	{
 	public:
 		Server(Port port)
@@ -25,7 +27,7 @@ namespace network
 			{
 				ServerSocket serverSocket(_port);
 				//_reactor.setTimeout(Poco::Timespan(10, 0));
-				_acceptor = std::make_unique<SocketAcceptor<T>>(serverSocket, _reactor);
+				_acceptor = std::make_unique<ScooterSocketAcceptor<T>>(*this, serverSocket, _reactor);
 			}
 			catch (const std::exception& e)
 			{
@@ -54,6 +56,6 @@ namespace network
 	private:
 		const Port _port;
 		SocketReactor _reactor;
-		std::unique_ptr<SocketAcceptor<T>> _acceptor;
+		std::unique_ptr<ScooterSocketAcceptor<T>> _acceptor;
 	};
 }

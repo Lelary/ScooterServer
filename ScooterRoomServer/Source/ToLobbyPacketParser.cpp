@@ -32,6 +32,8 @@ namespace packet
 
 			switch ((PacketType)packetType)
 			{
+			case PacketType::ReqLogin:
+				return ParseReqLogin(object);
 			case PacketType::ReqRoomList:
 				return ParseReqRoomList(object);
 			case PacketType::CreateRoom:
@@ -51,6 +53,19 @@ namespace packet
 		return nullptr;
 	}
 
+	std::unique_ptr<ToLobbyPacket> ToLobbyPacketParser::ParseReqLogin(Object::Ptr object)
+	{
+		auto packet = std::make_unique<ReqLogin>();
+
+		account::AccountId accountId = object->getValue<account::AccountId>("accountId");
+		packet->accountId = accountId;
+
+		std::string token = object->getValue<std::string>("token");
+		packet->token = token;
+
+		return packet;
+	}
+
 	std::unique_ptr<ToLobbyPacket> ToLobbyPacketParser::ParseReqRoomList(Object::Ptr object)
 	{
 		return std::make_unique<ReqRoomList>();
@@ -58,21 +73,16 @@ namespace packet
 
 	std::unique_ptr<ToLobbyPacket> ToLobbyPacketParser::ParseCreateRoom(Object::Ptr object)
 	{
-		account::AccountId accountId = object->getValue<account::AccountId>("accountId");
-
 		auto packet = std::make_unique<CreateRoom>();
-		packet->accountId = accountId;
 		return packet;
 	}
 
 	std::unique_ptr<ToLobbyPacket> ToLobbyPacketParser::ParseEnterRoom(Object::Ptr object)
 	{
 		game::RoomId roomId = object->getValue<game::RoomId>("roomId");
-		account::AccountId accountId = object->getValue<account::AccountId>("accountId");
 
 		auto packet = std::make_unique<EnterRoom>();
 		packet->roomId = roomId;
-		packet->accountId = accountId;
 		return packet;
 	}
 }

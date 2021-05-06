@@ -31,8 +31,8 @@ namespace network
 
 			std::cout << "message : " << _receiveBuffer << std::endl;
 
- 			if (!HandlePacket(*this, _receiveBuffer))
- 				return false;
+			if (!GetLobbyServer()->HandlePacket(*this, _receiveBuffer))
+				return false;
 
 			return true;
 		}
@@ -42,15 +42,8 @@ namespace network
 		}
 	}
 
-	bool LobbySessionHandler::HandlePacket(LobbySessionHandler& session, const char* buffer)
+	LobbyServer* LobbySessionHandler::GetLobbyServer()
 	{
-		auto packet = _packetParser.Parse(buffer);
-		if (packet == nullptr)
-			return false;
-
-		if (!_packetHandler.Handle(session, std::move(packet)))
-			return false;
-
-		return true;
+		return static_cast<LobbyServer*>(GetServer());
 	}
 }

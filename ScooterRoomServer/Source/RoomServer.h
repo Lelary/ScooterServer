@@ -8,5 +8,6 @@ namespace network
 	{
 	public:
 		RoomServer(Port port);
+		virtual void OnLogout(SessionHandlerBase& session) override {}
 	};
 }
