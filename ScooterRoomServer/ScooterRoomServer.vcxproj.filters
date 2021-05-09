@@ -34,6 +34,18 @@
     <Filter Include="Source Files\Packet">
       <UniqueIdentifier>{587b8213-d4f2-4e0e-b039-5b0ed5638193}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Database">
+      <UniqueIdentifier>{578db1bb-cd0e-42b1-b006-e19d6ec84c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Database">
+      <UniqueIdentifier>{22d8a43c-f38d-4eb3-890b-8d8db48aadd8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Database\Table">
+      <UniqueIdentifier>{5af70819-f39c-467a-a6ac-bdfea9599674}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Database\Table">
+      <UniqueIdentifier>{a2c5e0ad-66ca-4734-b2d8-851d00f11dcc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source\ScooterRoomServer.cpp">
@@ -68,6 +80,15 @@
     </ClCompile>
     <ClCompile Include="Source\FromLobbyPacketWriter.cpp">
       <Filter>Source Files\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Sqlite.cpp">
+      <Filter>Source Files\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\RdbSession.cpp">
+      <Filter>Source Files\Database</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\Database\Table\TableRoom.cpp">
+      <Filter>Source Files\Database\Table</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -118,6 +139,18 @@
     </ClInclude>
     <ClInclude Include="Source\ToLobbyPacketParser.h">
       <Filter>Header Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Sqlite.h">
+      <Filter>Header Files\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\RdbSession.h">
+      <Filter>Header Files\Database</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Database\Table\Entry.h">
+      <Filter>Header Files\Database\Table</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\Database\Table\TableRoom.h">
+      <Filter>Header Files\Database\Table</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -153,6 +153,8 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\Database\Table\TableRoom.cpp" />
+    <ClCompile Include="Source\RdbSession.cpp" />
     <ClCompile Include="Source\FromLobbyPacketWriter.cpp" />
     <ClCompile Include="Source\LobbyServer.cpp" />
     <ClCompile Include="Source\LobbySessionHandler.cpp" />
@@ -162,18 +164,23 @@
     <ClCompile Include="Source\Room.cpp" />
     <ClCompile Include="Source\RoomManager.cpp" />
     <ClCompile Include="Source\ScooterRoomServer.cpp" />
+    <ClCompile Include="Source\Sqlite.cpp" />
     <ClCompile Include="Source\ToLobbyPacketHandler.cpp" />
     <ClCompile Include="Source\ToLobbyPacketParser.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Account.h" />
+    <ClInclude Include="Source\Database\Table\Entry.h" />
+    <ClInclude Include="Source\Database\Table\TableRoom.h" />
     <ClInclude Include="Source\FromLobbyPacketWriter.h" />
+    <ClInclude Include="Source\RdbSession.h" />
     <ClInclude Include="Source\IServer.h" />
     <ClInclude Include="Source\LobbyPacket.h" />
     <ClInclude Include="Source\LobbyServer.h" />
     <ClInclude Include="Source\LobbySessionHandler.h" />
     <ClInclude Include="Source\PacketGroup.h" />
     <ClInclude Include="Source\ScooterSocketAcceptor.h" />
+    <ClInclude Include="Source\Sqlite.h" />
     <ClInclude Include="Source\ToLobbyPacketHandler.h" />
     <ClInclude Include="Source\RoomServer.h" />
     <ClInclude Include="Source\RoomSessionHandler.h" />
