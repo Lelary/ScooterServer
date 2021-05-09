@@ -46,4 +46,10 @@ namespace network
 	{
 		return static_cast<LobbyServer*>(GetServer());
 	}
+
+	bool LobbySessionHandler::Send(const packet::from_lobby::FromLobbyPacket& packet)
+	{
+		std::string msg = _writer.Write(packet);
+		return Send(msg.c_str(), msg.length());
+	}
 }

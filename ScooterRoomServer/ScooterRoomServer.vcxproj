@@ -153,6 +153,7 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source\FromLobbyPacketWriter.cpp" />
     <ClCompile Include="Source\LobbyServer.cpp" />
     <ClCompile Include="Source\LobbySessionHandler.cpp" />
     <ClCompile Include="Source\RoomServer.cpp" />
@@ -166,6 +167,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Account.h" />
+    <ClInclude Include="Source\FromLobbyPacketWriter.h" />
     <ClInclude Include="Source\IServer.h" />
     <ClInclude Include="Source\LobbyPacket.h" />
     <ClInclude Include="Source\LobbyServer.h" />
@@ -173,13 +175,13 @@
     <ClInclude Include="Source\PacketGroup.h" />
     <ClInclude Include="Source\ScooterSocketAcceptor.h" />
     <ClInclude Include="Source\ToLobbyPacketHandler.h" />
-    <ClInclude Include="Source\ToLobbyPacketParser.h" />
     <ClInclude Include="Source\RoomServer.h" />
     <ClInclude Include="Source\RoomSessionHandler.h" />
     <ClInclude Include="Source\SessionHandlerBase.h" />
     <ClInclude Include="Source\Room.h" />
     <ClInclude Include="Source\RoomManager.h" />
     <ClInclude Include="Source\Server.h" />
+    <ClInclude Include="Source\ToLobbyPacketParser.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -66,6 +66,9 @@
     <ClCompile Include="Source\ToLobbyPacketHandler.cpp">
       <Filter>Source Files\Packet</Filter>
     </ClCompile>
+    <ClCompile Include="Source\FromLobbyPacketWriter.cpp">
+      <Filter>Source Files\Packet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\Server.h">
@@ -95,9 +98,6 @@
     <ClInclude Include="Source\PacketGroup.h">
       <Filter>Header Files\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="Source\ToLobbyPacketParser.h">
-      <Filter>Header Files\Packet</Filter>
-    </ClInclude>
     <ClInclude Include="Source\ToLobbyPacketHandler.h">
       <Filter>Header Files\Packet</Filter>
     </ClInclude>
@@ -112,6 +112,12 @@
     </ClInclude>
     <ClInclude Include="Source\RoomServer.h">
       <Filter>Header Files\Network</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\FromLobbyPacketWriter.h">
+      <Filter>Header Files\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\ToLobbyPacketParser.h">
+      <Filter>Header Files\Packet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

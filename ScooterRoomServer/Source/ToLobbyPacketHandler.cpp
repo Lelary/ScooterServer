@@ -43,46 +43,34 @@ namespace packet
 
 		session.OnLoginSuccess(packet->accountId, packet->token);
 
-		std::stringstream ss;
-		ss << "welcome " << session.GetAccountId();
-
-		std::string msg = ss.str();
-		session.Send(msg.c_str(), msg.length());
+		packet::from_lobby::ResLogin outPacket;
+		outPacket.accountId = packet->accountId;
+		session.Send(outPacket);
 
 		return true;
 	}
 
 	bool ToLobbyPacketHandler::OnReqRoomList(network::LobbySessionHandler& session, ReqRoomList* packet)
 	{
-		std::stringstream ss;
-		ss << "you " << session.GetAccountId() << " requested to give room list";
-
-		std::string msg = ss.str();
-		session.Send(msg.c_str(), msg.length());
+		packet::from_lobby::ResRoomList outPacket;
+		session.Send(outPacket);
 
 		return true;
 	}
 
 	bool ToLobbyPacketHandler::OnCreateRoom(network::LobbySessionHandler& session, CreateRoom* packet)
 	{
-		std::stringstream ss;
-		ss << "you " << session.GetAccountId() << " requested to create new room";
-
-		std::string msg = ss.str();
-		session.Send(msg.c_str(), msg.length());
+		packet::from_lobby::ResCreateRoom outPacket;
+		session.Send(outPacket);
 
 		return true;
 	}
 
 	bool ToLobbyPacketHandler::OnEnterRoom(network::LobbySessionHandler& session, EnterRoom* packet)
 	{
-		std::cout << packet->roomId << std::endl;
-
-		std::stringstream ss;
-		ss << "you " << session.GetAccountId() << " requested to enter room number " << packet->roomId;
-
-		std::string msg = ss.str();
-		session.Send(msg.c_str(), msg.length());
+		packet::from_lobby::ResEnterRoom outPacket;
+		outPacket.roomId = packet->roomId;
+		session.Send(outPacket);
 
 		return true;
 	}
