@@ -3,6 +3,8 @@
 
 namespace network
 {
+	const int HEADER_SIZE = 4;
+
 	SessionHandlerBase::SessionHandlerBase(StreamSocket& socket, SocketReactor& reactor)
 		: _socket(socket), _reactor(reactor)
 	{
@@ -34,8 +36,14 @@ namespace network
 	{
 		ZeroMemory(_receiveBuffer, BUFFER_SIZE);
 
-		int n = _socket.receiveBytes(_receiveBuffer, sizeof(_receiveBuffer));
-		return (n > 0);
+		char receiveBuffer[BUFFER_SIZE] = { 0, };
+		int n = _socket.receiveBytes(receiveBuffer, sizeof(receiveBuffer));
+
+		if (n < HEADER_SIZE)
+			return false;
+
+		memcpy(_receiveBuffer, receiveBuffer + HEADER_SIZE, n - HEADER_SIZE);
+		return true;
 	}
 
 	bool SessionHandlerBase::Send(const char* message, int len)
@@ -46,9 +54,10 @@ namespace network
 			return false;
 		}
 
-		char sendBuffer[BUFFER_SIZE] = { 0, };
-		strncpy_s(sendBuffer, message, len);
-		_socket.sendBytes(sendBuffer, len);
+		Packet packet;
+		packet.header = _byteswap_ulong(len);
+		strncpy_s(packet.sendBuffer, message, len);
+		_socket.sendBytes(&packet, len + HEADER_SIZE);
 		return true;
 	}
 
@@ -57,7 +66,7 @@ namespace network
 		_socket.shutdown();
 		GetServer()->OnLogout(*this);
 	}
-	
+
 	void SessionHandlerBase::OnLoginSuccess(account::AccountId accountId, const std::string& token)
 	{
 		SetAccountId(accountId);
@@ -68,4 +77,10 @@ namespace network
 	{
 		Shutdown();
 	}
+
+	struct Packet
+	{
+		int header = 0;
+		char sendBuffer[BUFFER_SIZE - HEADER_SIZE] = { 0, };
+	};
 }
