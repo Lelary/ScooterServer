@@ -5,6 +5,12 @@ namespace network
 {
 	const int HEADER_SIZE = 4;
 
+	struct Packet
+	{
+		int header = 0;
+		char sendBuffer[BUFFER_SIZE - HEADER_SIZE] = { 0, };
+	};
+
 	SessionHandlerBase::SessionHandlerBase(StreamSocket& socket, SocketReactor& reactor)
 		: _socket(socket), _reactor(reactor)
 	{
@@ -77,10 +83,4 @@ namespace network
 	{
 		Shutdown();
 	}
-
-	struct Packet
-	{
-		int header = 0;
-		char sendBuffer[BUFFER_SIZE - HEADER_SIZE] = { 0, };
-	};
 }
